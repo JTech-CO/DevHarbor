@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param()
+param([switch]$WindowsIntegration)
 $ErrorActionPreference='Stop'
 $repoPath=Split-Path -Parent $PSScriptRoot
 $localSdk=Join-Path $repoPath '.tools/dotnet/dotnet.exe'
@@ -17,6 +17,10 @@ try {
     if($LASTEXITCODE -ne 0){throw 'Build failed'}
     & $sdk run --project tests/DevHarbor.ContractChecks --configuration Release --no-build
     if($LASTEXITCODE -ne 0){throw 'Contract checks failed'}
+    if($WindowsIntegration) {
+        & $sdk run --project tests/DevHarbor.WindowsChecks --configuration Release --no-build
+        if($LASTEXITCODE -ne 0){throw 'Windows integration checks failed'}
+    }
     git diff --check
     if($LASTEXITCODE -ne 0){throw 'Whitespace validation failed'}
 } finally { Pop-Location }

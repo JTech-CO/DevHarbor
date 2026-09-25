@@ -1,8 +1,10 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/DevHarbor.Domain/DevHarbor.Domain.csproj" />
+    <Project Path="src/DevHarbor.Windows/DevHarbor.Windows.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/DevHarbor.ContractChecks/DevHarbor.ContractChecks.csproj" />
+    <Project Path="tests/DevHarbor.WindowsChecks/DevHarbor.WindowsChecks.csproj" />
   </Folder>
 </Solution>

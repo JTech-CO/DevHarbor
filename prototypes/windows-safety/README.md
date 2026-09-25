@@ -1,5 +1,7 @@
 # DevHarbor Windows safety experiments
 
+Historical exploratory code. P1 handle-based implementation and current gates live in `src/DevHarbor.Windows` and `docs/milestones/P1-results.md`. This prototype is not linked into the product solution.
+
 Production deletion is disabled. This is a Windows-only API experiment, not a cleaner application or a security boundary against malicious local code.
 
 Run from PowerShell 7 on Windows:
