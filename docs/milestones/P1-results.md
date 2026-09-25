@@ -26,7 +26,9 @@ Windows NT 10.0.26200.0 / x64 / 로컬 NTFS / .NET SDK 10.0.401.
 - 실제 case-sensitive flag, offline 속성, ACL deny, hardlink, junction, 파일 잠금 fixture 사용.
 - 취소·snapshot 변경·내용 변경·root 변경·복원 재사용·미지원 recycle 요청의 변경 차단 확인.
 
-실행 증거: [p1-windows-2026-09-25.json](../evidence/p1-windows-2026-09-25.json). 원본 fixture와 각 실행 로그는 Git에서 제외한 `artifacts/p1/`에 남긴다. 공유 JSON에는 로컬 절대 경로를 포함하지 않는다. Windows CI에도 같은 suite를 연결했다. 최초 push 전에는 원격 CI 미실행 상태이며 결과가 확인되면 별도 기록한다.
+실행 증거: [p1-windows-2026-09-25.json](../evidence/p1-windows-2026-09-25.json). 원본 fixture와 각 실행 로그는 Git에서 제외한 `artifacts/p1/`에 남긴다. 공유 JSON에는 로컬 절대 경로를 포함하지 않는다.
+
+원격 검증: 구현 커밋 `8ad28eb`의 [Windows CI 실행](https://github.com/JTech-CO/DevHarbor/actions/runs/36094085722)이 성공했다. `windows-2025` runner에서 Release 빌드·정책·Windows fixture suite를 실행했고 job은 41초에 완료했다. 로컬 Windows 11 결과와 호스팅된 Windows Server runner 결과를 구분한다.
 
 ## 검증 중 수정한 문제
 
