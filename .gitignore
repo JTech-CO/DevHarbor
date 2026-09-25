@@ -1,0 +1,9 @@
+prototypes/windows-safety/runs/
+*.dll
+*.pdb
+.tools/
+**/bin/
+**/obj/
+.vs/
+artifacts/
+prototypes/windows-safety/latest-results.json

@@ -1,0 +1,119 @@
+{
+  "timeUtc": "2026-09-25T03:40:03.2701513Z",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "powerShell": "7.6.5",
+  "productionDeletionEnabled": false,
+  "humanApprovalUiVerified": false,
+  "results": [
+    {
+      "name": "boundary.unicode-and-spaces",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.root-itself-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.prefix-sibling-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.traversal-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.ads-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.unc-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.missing-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.directory-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.junction-escape-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.hardlink-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.locked-file-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.lease-blocks-write",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "boundary.lease-blocks-parent-rename",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "approval.without-consent-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "approval.denial-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "approval.plan-tampering-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "approval.expiry-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "approval.target-mutation-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "approval.file-replacement-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "approval.execute-once-and-replay-rejected",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "approval.executor-failure-consumes-approval",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "recycle.separate-process-roundtrip-and-collision",
+      "status": "passed",
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "timeUtc": "2026-09-25T04:19:13.7556321+00:00",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "architecture": "X64",
+  "failures": 0,
+  "productionDeletionEnabled": false,
+  "recycleEnabled": false,
+  "testResults": [
+    {
+      "name": "positive-control-and-fresh-process-restore",
+      "status": "passed"
+    },
+    {
+      "name": "unicode-spaces-and-long-path",
+      "status": "passed"
+    },
+    {
+      "name": "sibling-prefix-root-and-traversal-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "device-unc-stream-relative-ambiguous-paths-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "system-and-profile-roots-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "junction-escape-and-root-alias-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "hardlink-alias-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "directory-and-offline-content-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "case-sensitive-directory-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "exclusive-lock-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "access-denied-is-distinct-and-does-not-move-file",
+      "status": "passed"
+    },
+    {
+      "name": "bounded-size-and-empty-file",
+      "status": "passed"
+    },
+    {
+      "name": "snapshot-content-change-even-with-restored-mtime-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "snapshot-file-replacement-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "snapshot-root-replacement-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "overlapping-quarantine-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "quarantine-retag-during-commit-never-escapes",
+      "status": "passed"
+    },
+    {
+      "name": "cancellation-before-commit-leaves-original",
+      "status": "passed"
+    },
+    {
+      "name": "restore-collision-at-commit-is-atomic-no-overwrite",
+      "status": "passed"
+    },
+    {
+      "name": "restore-modified-quarantine-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "restore-replaced-parent-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "restore-cancelled-and-replay-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "unsupported-recycle-never-deletes-or-falls-back",
+      "status": "passed"
+    },
+    {
+      "name": "repeated-concurrent-leaf-and-parent-swap-while-committing",
+      "status": "passed"
+    }
+  ],
+  "notVerified": [
+    "Real Recycle Bin disabled/quota-full configuration (backend disabled)",
+    "Cross-volume hardware",
+    "Actual cloud provider placeholders",
+    "Writable memory maps",
+    "Crash-persistent ledger and human approval (P3)"
+  ]
+}
