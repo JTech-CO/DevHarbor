@@ -20,6 +20,10 @@ try {
     if($WindowsIntegration) {
         & $sdk run --project tests/DevHarbor.WindowsChecks --configuration Release --no-build
         if($LASTEXITCODE -ne 0){throw 'Windows integration checks failed'}
+        & $sdk run --project tests/DevHarbor.DiscoveryChecks --configuration Release --no-build
+        if($LASTEXITCODE -ne 0){throw 'Discovery integration checks failed'}
+        & $sdk run --project tests/DevHarbor.DesktopChecks --configuration Release --no-build
+        if($LASTEXITCODE -ne 0){throw 'Desktop checks failed'}
     }
     git diff --check
     if($LASTEXITCODE -ne 0){throw 'Whitespace validation failed'}

@@ -1,0 +1,37 @@
+{
+  "timeUtc": "2026-09-27T05:48:21.4455602+00:00",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "failures": 0,
+  "testResults": [
+    {
+      "name": "empty-state-and-no-automatic-scan",
+      "status": "passed"
+    },
+    {
+      "name": "large-fixture-ui-responsive-and-results-bound",
+      "status": "passed"
+    },
+    {
+      "name": "drive-environment-filters-and-selection",
+      "status": "passed"
+    },
+    {
+      "name": "custom-path-validation-and-explicit-scan",
+      "status": "passed"
+    },
+    {
+      "name": "cancel-returns-partial-results-and-enables-rescan",
+      "status": "passed"
+    },
+    {
+      "name": "no-mutation-controls-or-binding-errors",
+      "status": "passed"
+    }
+  ],
+  "fixtureFileCount": 1500,
+  "fullScanMilliseconds": 3440.5652,
+  "dispatcherTicks": 109,
+  "maximumUiGapMilliseconds": 44.82510000000002,
+  "cancelMilliseconds": 13.5461,
+  "visualReview": "WPF RenderTargetBitmap; interactive manual user review not claimed"
+}

@@ -1,0 +1,106 @@
+{
+  "timeUtc": "2026-09-27T05:48:14.9633726+00:00",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "failures": 0,
+  "testResults": [
+    {
+      "name": "all-six-adapters-readonly-contract",
+      "status": "passed"
+    },
+    {
+      "name": "not-installed-does-not-launch-or-install",
+      "status": "passed"
+    },
+    {
+      "name": "pip-uv-npm-custom-path-with-spaces",
+      "status": "passed"
+    },
+    {
+      "name": "hf-environment-precedence-and-ollama-no-api-call",
+      "status": "passed"
+    },
+    {
+      "name": "ambiguous-or-multiline-cli-path-is-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "unknown-version-does-not-prove-layout-or-cleanup",
+      "status": "passed"
+    },
+    {
+      "name": "docker-remote-context-never-queries-engine",
+      "status": "passed"
+    },
+    {
+      "name": "docker-env-precedence-and-remote-host-guard",
+      "status": "passed"
+    },
+    {
+      "name": "malformed-docker-output-and-command-failure-stay-unknown",
+      "status": "passed"
+    },
+    {
+      "name": "discovery-cancellation-preserves-six-status-rows",
+      "status": "passed"
+    },
+    {
+      "name": "hardlink-and-parent-child-deduplication",
+      "status": "passed"
+    },
+    {
+      "name": "corrupt-index-and-hf-without-symlinks-are-metadata-only",
+      "status": "passed"
+    },
+    {
+      "name": "handle-enumeration-crosses-buffer-boundaries",
+      "status": "passed"
+    },
+    {
+      "name": "missing-and-denied-root-not-empty",
+      "status": "passed"
+    },
+    {
+      "name": "empty-directory-is-measured-zero",
+      "status": "passed"
+    },
+    {
+      "name": "junction-outside-sentinel-never-counted",
+      "status": "passed"
+    },
+    {
+      "name": "offline-entry-excluded-and-readable-part-retained",
+      "status": "passed"
+    },
+    {
+      "name": "root-and-enumerated-file-replacement-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "enumeration-pins-directory-and-releases-on-break",
+      "status": "passed"
+    },
+    {
+      "name": "entry-budget-retains-known-subtotal",
+      "status": "passed"
+    },
+    {
+      "name": "midscan-cancellation-retains-known-subtotal",
+      "status": "passed"
+    },
+    {
+      "name": "engine-values-never-enter-native-file-totals",
+      "status": "passed"
+    },
+    {
+      "name": "command-arguments-preserve-spaces-and-metacharacters",
+      "status": "passed"
+    },
+    {
+      "name": "command-output-timeout-and-cancellation-bounds",
+      "status": "passed"
+    }
+  ],
+  "fixtureFileCount": 1500,
+  "scanMilliseconds": 1966.7766,
+  "productionDeletionEnabled": false
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "observedDate": "2026-09-27",
+  "scope": "Windows local metadata discovery; no semantic recovery or mutation approval",
+  "adapters": [
+    {
+      "tool": "Pip",
+      "fixtureResponseVersions": [
+        "26.2.1"
+      ],
+      "fixtureVersionsAreSimulated": true,
+      "localProbe": {
+        "tool": "Pip",
+        "version": "25.2",
+        "status": "Ready",
+        "environment": "NativeLocal"
+      },
+      "source": "pip cache dir",
+      "readOnly": true,
+      "layoutSemanticsVerified": false,
+      "cleanupEnabled": false,
+      "unknownVersionPolicy": "metadata only; version remains unverified"
+    },
+    {
+      "tool": "Uv",
+      "fixtureResponseVersions": [
+        "0.11.0"
+      ],
+      "fixtureVersionsAreSimulated": true,
+      "localProbe": {
+        "tool": "Uv",
+        "version": "0.11.19",
+        "status": "Ready",
+        "environment": "NativeLocal"
+      },
+      "source": "uv cache dir",
+      "readOnly": true,
+      "layoutSemanticsVerified": false,
+      "cleanupEnabled": false,
+      "unknownVersionPolicy": "metadata only; version remains unverified"
+    },
+    {
+      "tool": "Npm",
+      "fixtureResponseVersions": [
+        "11.12.0"
+      ],
+      "fixtureVersionsAreSimulated": true,
+      "localProbe": {
+        "tool": "Npm",
+        "version": "11.12.1",
+        "status": "Ready",
+        "environment": "NativeLocal"
+      },
+      "source": "npm config get cache via node/npm-cli.js",
+      "readOnly": true,
+      "layoutSemanticsVerified": false,
+      "cleanupEnabled": false,
+      "unknownVersionPolicy": "metadata only; version remains unverified"
+    },
+    {
+      "tool": "Ollama",
+      "fixtureResponseVersions": [
+        "0.17.7"
+      ],
+      "fixtureVersionsAreSimulated": true,
+      "localProbe": {
+        "tool": "Ollama",
+        "version": "미확인",
+        "status": "Ready",
+        "environment": "NativeLocal"
+      },
+      "source": "OLLAMA_MODELS or documented Windows path; executable version metadata",
+      "readOnly": true,
+      "layoutSemanticsVerified": false,
+      "cleanupEnabled": false,
+      "unknownVersionPolicy": "metadata only; version remains unverified"
+    },
+    {
+      "tool": "HuggingFace",
+      "fixtureResponseVersions": [
+        "1.4.1"
+      ],
+      "fixtureVersionsAreSimulated": true,
+      "localProbe": {
+        "tool": "HuggingFace",
+        "version": "미확인",
+        "status": "NotInstalled",
+        "environment": "NativeLocal"
+      },
+      "source": "Python package metadata and hub environment precedence",
+      "readOnly": true,
+      "layoutSemanticsVerified": false,
+      "cleanupEnabled": false,
+      "unknownVersionPolicy": "metadata only; version remains unverified"
+    },
+    {
+      "tool": "Docker",
+      "fixtureResponseVersions": [
+        "29.3.0"
+      ],
+      "fixtureVersionsAreSimulated": true,
+      "localProbe": {
+        "tool": "Docker",
+        "version": "29.6.2",
+        "status": "Unavailable",
+        "environment": "LocalEngine"
+      },
+      "source": "local context endpoint and pinned named-pipe system df",
+      "readOnly": true,
+      "layoutSemanticsVerified": false,
+      "cleanupEnabled": false,
+      "unknownVersionPolicy": "metadata only; version remains unverified"
+    }
+  ]
+}

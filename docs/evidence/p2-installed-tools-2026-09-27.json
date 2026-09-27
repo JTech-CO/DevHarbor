@@ -1,0 +1,38 @@
+[
+  {
+    "tool": "Pip",
+    "version": "25.2",
+    "status": "Ready",
+    "environment": "NativeLocal"
+  },
+  {
+    "tool": "Uv",
+    "version": "0.11.19",
+    "status": "Ready",
+    "environment": "NativeLocal"
+  },
+  {
+    "tool": "Npm",
+    "version": "11.12.1",
+    "status": "Ready",
+    "environment": "NativeLocal"
+  },
+  {
+    "tool": "Ollama",
+    "version": "미확인",
+    "status": "Ready",
+    "environment": "NativeLocal"
+  },
+  {
+    "tool": "HuggingFace",
+    "version": "미확인",
+    "status": "NotInstalled",
+    "environment": "NativeLocal"
+  },
+  {
+    "tool": "Docker",
+    "version": "29.6.2",
+    "status": "Unavailable",
+    "environment": "LocalEngine"
+  }
+]

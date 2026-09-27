@@ -38,3 +38,7 @@ Windows build 22000 이상 x64, 로컬 고정 NTFS 볼륨의 명시적인 도구
 ## 근거
 
 크기 및 link 정보는 Microsoft의 [FILE_STANDARD_INFO](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_standard_info) 정의와 [GetFileInformationByHandleEx](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfileinformationbyhandleex)를 따른다. 실제 검증과 삭제 기능의 미해결 조건은 [P1 종료·P2 인계](../milestones/P1-closeout.md)를 따른다.
+
+## P2 구현 상태 (2026-09-27)
+
+단일 항목 계약에 `ReadDirectory`와 `ReadScanMetadata`를 추가했다. 전자는 root/디렉터리 ID를 검증하고 pinned directory handle에서 열거하며, 후자는 시작 root 및 열거된 항목의 ID와 다시 비교한다. 발견·순회·집계·UI의 구현 계약은 [ADR-003](ADR-003-readonly-discovery.md), 검증은 [P2 결과](../milestones/P2-results.md)를 따른다. 위 P2 책임 항목을 이제 구현했지만 관찰 결과가 변경 권한으로 바뀌는 것은 아니다.

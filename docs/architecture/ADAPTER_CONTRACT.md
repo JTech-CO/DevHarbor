@@ -2,7 +2,7 @@
 
 ## 지원 표
 
-아래는 목표 범위다. 실제 지원 버전은 P2/P3 검증 후 adapter manifest에 기록한다. P0에서 실환경 지원 완료로 표시하지 않는다.
+아래는 목표 범위다. P2의 실제 발견 표면과 제한은 [ADR-003](ADR-003-readonly-discovery.md), 버전/fixture/설치 환경은 [catalog](adapter-catalog.json)에 기록한다. 합성 응답과 실제 설치 검증을 구분하며 변경 capability는 모두 false다.
 
 | 도구 | 발견 근거 | 첫 기능 | 변경 전 추가 조건 |
 |---|---|---|---|

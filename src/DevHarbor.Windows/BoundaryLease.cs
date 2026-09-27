@@ -4,7 +4,7 @@ using Microsoft.Win32.SafeHandles;
 namespace DevHarbor.Windows;
 
 // Read-only public inspection. Mutation stays internal to the P1 integration harness.
-public static class WindowsBoundary
+public static partial class WindowsBoundary
 {
     // Does not enumerate descendants or read file data; safe for large cache observations.
     public static EntryMetadata ReadMetadata(string root, string path, CancellationToken cancellationToken = default)
@@ -27,6 +27,7 @@ internal sealed class BoundaryLease : IDisposable
     internal SafeFileHandle Handle => handles[^1];
     internal SafeFileHandle ParentHandle => handles[^2];
     internal string DirectoryIdentity { get; private set; } = "";
+    internal FileIdentity? ScopeIdentity { get; private set; }
     internal EntryMetadata? Observation { get; private set; }
     internal FileSnapshot? Snapshot { get; private set; }
 
@@ -50,7 +51,21 @@ internal sealed class BoundaryLease : IDisposable
         return Open(root, path, false, token, metadataOnly: true);
     }
 
-    private static BoundaryLease Open(string root, string? file, bool mutation, CancellationToken token, bool metadataOnly = false)
+    internal static BoundaryLease ScanDirectory(string root, string path, FileIdentity scope, FileIdentity directory, CancellationToken token)
+    {
+        root = BoundaryPath.Root(root); path = BoundaryPath.Canonical(path);
+        if (!string.Equals(root, path, StringComparison.OrdinalIgnoreCase) && !BoundaryPath.Contains(root, path))
+            throw new BoundaryException(BoundaryError.OutsideBoundary, "Directory is outside scope");
+        var lease = Open(root, path, false, token, directoryTarget: true);
+        try
+        {
+            if (lease.ScopeIdentity == scope && NativeFile.Info(lease.Handle).Identity == directory) return lease;
+            throw new BoundaryException(BoundaryError.TargetChanged, "Scan directory was replaced");
+        }
+        catch { lease.Dispose(); throw; }
+    }
+
+    private static BoundaryLease Open(string root, string? file, bool mutation, CancellationToken token, bool metadataOnly = false, bool directoryTarget = false)
     {
         var lease = new BoundaryLease();
         try
@@ -63,10 +78,11 @@ internal sealed class BoundaryLease : IDisposable
             {
                 token.ThrowIfCancellationRequested();
                 if (i >= 0) current = Path.Combine(current, components[i]);
-                bool leaf = file != null && i == components.Length - 1;
+                bool leaf = file != null && i == components.Length - 1 && !directoryTarget;
                 var handle = NativeFile.Open(current, !leaf, mutation, metadataOnly && leaf);
                 lease.handles.Add(handle);
                 var info = NativeFile.Info(handle);
+                if (string.Equals(current, root, StringComparison.OrdinalIgnoreCase)) lease.ScopeIdentity = info.Identity;
                 if ((info.Attributes & NativeFile.Reparse) != 0) throw new BoundaryException(BoundaryError.ReparsePoint, "Reparse components are not traversed");
                 if ((info.Attributes & NativeFile.OfflineOrRecall) != 0) throw new BoundaryException(BoundaryError.UnsupportedFeature, "Offline or recall content is not read");
                 if (!string.Equals(NativeFile.FinalPath(handle), current.TrimEnd('\\'), StringComparison.OrdinalIgnoreCase))
