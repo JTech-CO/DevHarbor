@@ -3,12 +3,27 @@ using DevHarbor.Execution;
 namespace DevHarbor.Desktop;
 public partial class MainWindow : Window
 {
+    private readonly AgentConnection connection = new();
+    private bool closingAfterDisconnect;
     public MainWindow() : this(new StorageViewModel()) { }
     public MainWindow(StorageViewModel model)
     {
         InitializeComponent(); DataContext = model;
-        Closing += (_, _) => model.Cancel();
+        model.ScanCompleted += connection.Hub.Publish;
+        Closing += async (_, e) =>
+        {
+            model.Cancel();
+            if (!connection.Hub.IsSharing) { model.ScanCompleted -= connection.Hub.Publish; return; }
+            if (!closingAfterDisconnect)
+            {
+                e.Cancel = true; closingAfterDisconnect = true;
+                await connection.DisposeAsync(); model.ScanCompleted -= connection.Hub.Publish;
+                await Dispatcher.InvokeAsync(Close);
+            }
+        };
     }
+    private void OpenModels(object sender, RoutedEventArgs e) => new ModelSessionsWindow { Owner = this }.ShowDialog();
+    private void OpenConnections(object sender, RoutedEventArgs e) => new ConnectionsWindow(connection, (StorageViewModel)DataContext) { Owner = this }.ShowDialog();
     private async void OpenCleanup(object sender, RoutedEventArgs e)
     {
         var button = (System.Windows.Controls.Button)sender; button.IsEnabled = false;

@@ -73,7 +73,18 @@
       "readOnly": true,
       "layoutSemanticsVerified": false,
       "cleanupEnabled": false,
-      "unknownVersionPolicy": "metadata only; version remains unverified"
+      "unknownVersionPolicy": "metadata only; version remains unverified",
+      "modelSessions": {
+        "endpoint": "http://127.0.0.1:11434/",
+        "verifiedContractVersion": "0.34.4",
+        "fixtureUnloadVerified": true,
+        "localReadProbeVerified": true,
+        "liveUnloadVerified": false,
+        "approval": "desktop-only single-use 30-second grant",
+        "sourceRestriction": "explicit :local; source-qualified observed names rejected",
+        "unknownVersionPolicy": "read-only",
+        "diskCleanupEnabled": false
+      }
     },
     {
       "tool": "HuggingFace",

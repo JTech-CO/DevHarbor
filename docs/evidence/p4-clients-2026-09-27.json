@@ -1,0 +1,19 @@
+{
+  "claude": {
+    "version": "2.1.233",
+    "status": "connected",
+    "probe": "isolated CLAUDE_CONFIG_DIR, mcp get health check"
+  },
+  "codex": {
+    "version": "0.158.0-alpha.2.1",
+    "status": "connected",
+    "toolCount": 4,
+    "probe": "app-server initialize + mcpServerStatus/list; four DevHarbor tools discovered"
+  },
+  "cursor": {
+    "status": "not-found-in-checked-install-locations"
+  },
+  "userConfigurationModified": false,
+  "modelInferenceRequested": false,
+  "observedDate": "2026-09-27"
+}

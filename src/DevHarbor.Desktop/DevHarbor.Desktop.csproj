@@ -2,4 +2,5 @@
   <PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0-windows</TargetFramework><UseWPF>true</UseWPF></PropertyGroup>
   <ItemGroup><ProjectReference Include="../DevHarbor.Discovery/DevHarbor.Discovery.csproj" /><ProjectReference Include="../DevHarbor.Execution/DevHarbor.Execution.csproj" /></ItemGroup>
   <ItemGroup><InternalsVisibleTo Include="DevHarbor.ExecutionChecks" /></ItemGroup>
+<ItemGroup><ProjectReference Include="../DevHarbor.AgentBridge/DevHarbor.AgentBridge.csproj"/><ProjectReference Include="../DevHarbor.Models/DevHarbor.Models.csproj"/><ProjectReference Include="../DevHarbor.Mcp/DevHarbor.Mcp.csproj" ReferenceOutputAssembly="false"/><InternalsVisibleTo Include="DevHarbor.P4Checks"/></ItemGroup>
 </Project>

@@ -1,0 +1,140 @@
+{
+  "timeUtc": "2026-09-27T13:19:40.1941017+00:00",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "failures": 0,
+  "testResults": [
+    {
+      "name": "sharing-default-off-and-scan-required",
+      "status": "passed"
+    },
+    {
+      "name": "pagination-snapshot-expiry-and-stale-item",
+      "status": "passed"
+    },
+    {
+      "name": "schema-rejects-approval-path-shell-scope-and-invalid-types",
+      "status": "passed"
+    },
+    {
+      "name": "plan-dedup-conflict-review-expiry-and-no-execution",
+      "status": "passed"
+    },
+    {
+      "name": "cancelled-plan-creates-no-record",
+      "status": "passed"
+    },
+    {
+      "name": "sdk-stdio-negotiation-2024-11-05",
+      "status": "passed"
+    },
+    {
+      "name": "sdk-stdio-negotiation-2025-03-26",
+      "status": "passed"
+    },
+    {
+      "name": "sdk-stdio-negotiation-2025-06-18",
+      "status": "passed"
+    },
+    {
+      "name": "sdk-stdio-negotiation-2025-11-25",
+      "status": "passed"
+    },
+    {
+      "name": "sdk-stdio-negotiation-2026-07-28",
+      "status": "passed"
+    },
+    {
+      "name": "stdio-app-absent-and-cancellation-no-auto-start",
+      "status": "passed"
+    },
+    {
+      "name": "stdio-to-current-user-pipe-overview-items-plan-status",
+      "status": "passed"
+    },
+    {
+      "name": "raw-pipe-schema-and-frame-limit-enforced",
+      "status": "passed"
+    },
+    {
+      "name": "plan-storage-bounded-and-no-silent-scope-expansion",
+      "status": "passed"
+    },
+    {
+      "name": "second-app-cannot-replace-current-user-pipe",
+      "status": "passed"
+    },
+    {
+      "name": "oversized-stdio-input-is-bounded-and-exits",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-metrics-not-conflated-and-missing-vram-not-zero",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-remote-custom-endpoint-never-contacted",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-unknown-version-readonly-and-invalid-responses",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-explicit-grant-exact-payload-and-replay-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-source-qualified-names-never-post",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-forged-grant-and-digest-change-never-post",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-expiry-cancel-and-closed-session-never-post",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-lost-response-is-unknown-no-retry",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-already-absent-and-reloaded-outcome",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-concurrent-unload-is-blocked",
+      "status": "passed"
+    },
+    {
+      "name": "ollama-query-cancellation-propagates",
+      "status": "passed"
+    },
+    {
+      "name": "connections-default-off-config-and-render",
+      "status": "passed"
+    },
+    {
+      "name": "model-metrics-and-unknown-version-ui",
+      "status": "passed"
+    },
+    {
+      "name": "unload-confirmation-default-deny-and-expiry-render",
+      "status": "passed"
+    },
+    {
+      "name": "p4-wpf-bindings-resolve",
+      "status": "passed"
+    }
+  ],
+  "protocols": [
+    "2024-11-05",
+    "2025-03-26",
+    "2025-06-18",
+    "2025-11-25",
+    "2026-07-28"
+  ],
+  "liveUnloadPerformed": false,
+  "humanUiVerified": false
+}

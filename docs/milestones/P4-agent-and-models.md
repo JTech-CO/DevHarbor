@@ -1,12 +1,12 @@
 # P4 — MCP와 모델 세션
 
-상태: 대기. 조회 선행: P2. 변경 계획 연결 선행: P3. 담당: Mcp, Desktop, Discovery.
+상태: 기반 구현·자동 검증 완료. Claude Code/Codex 실제 연결 확인. Cursor 실제 연결·실제 언로드·사람 UI 수용은 남아 있다. [구현 결과와 증거](P4-results.md)를 기준으로 판단한다. 조회 선행: P2. 변경 계획 연결 선행: P3. 담당: Mcp, Desktop, Discovery.
 
 ## 작업
 
 1. stdio 서버에 `devharbor_overview`, `devharbor_items`, `devharbor_plan`, `devharbor_plan_status`를 제공한다.
 2. schema validation, 페이지 처리, 요청 취소, stdout 프로토콜 전용, stderr 진단을 구현한다.
-3. 에이전트는 item ID로 계획만 요청하고 앱 승인 후 상태를 조회한다. 클라이언트가 승인 권한을 발급하지 못하게 한다.
+3. 에이전트는 item ID로 계획만 요청하고 앱에서 검토한 상태를 조회한다. 현재 실제 캐시 변경 게이트가 닫혀 있으므로 계획은 Blocked이며 검토를 실행 승인으로 간주하지 않는다. 클라이언트가 승인 권한을 발급하지 못하게 한다.
 4. Claude/Codex/Cursor의 실제 지원 프로토콜·설정·버전을 고정해 연결을 확인한다.
 5. Ollama 로드 모델 조회 및 사용자가 앱에서 요청하는 언로드를 검증한다. RAM/VRAM/working set은 구분한다.
 

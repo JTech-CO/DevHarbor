@@ -1,6 +1,6 @@
 # DevHarbor
 
-Windows 개발·로컬 AI 환경의 저장 공간을 조사하는 WPF 앱입니다. P3 승인·SQLite 원장·샘플 보관/복구 기반을 구현하고 자동 검증했습니다. 실제 캐시 삭제는 아직 제공하지 않습니다.
+Windows 개발·로컬 AI 환경의 저장 공간을 조사하는 WPF 앱입니다. P4 MCP 메타데이터 공유·모델 세션 기반까지 구현하고 자동 검증했습니다. 실제 캐시 삭제는 아직 제공하지 않습니다.
 
 - [제품·브랜드·구성 요소 기획](docs/DEVHARBOR_PRODUCT_PLAN.md)
 - [Windows 안전성 실험 결과](docs/WINDOWS_SAFETY_REPORT.md)
@@ -8,6 +8,9 @@ Windows 개발·로컬 AI 환경의 저장 공간을 조사하는 WPF 앱입니�
 - [마일스톤 로드맵](docs/milestones/README.md)
 - [P0 작업 및 완료 기준](docs/milestones/P0-foundation.md)
 - [P1 종료·P2 착수 조건](docs/milestones/P1-closeout.md)
+- [P4 구현 결과·클라이언트 검증·남은 게이트](docs/milestones/P4-results.md)
+- [MCP 연결 안내](docs/MCP_SETUP.md)
+- [MCP·모델 세션 설계](docs/architecture/ADR-005-agent-model-sessions.md)
 - [P3 구현 결과·실행·검증 범위](docs/milestones/P3-results.md)
 - [승인·원장 설계와 제한](docs/architecture/ADR-004-approved-workflow.md)
 - [P2 구현 결과·실행·검증 범위](docs/milestones/P2-results.md)
@@ -19,14 +22,14 @@ Windows 개발·로컬 AI 환경의 저장 공간을 조사하는 WPF 앱입니�
 
 저장소: [JTech-CO/DevHarbor](https://github.com/JTech-CO/DevHarbor). MIT 라이선스. 이름의 상표·도메인 가용성은 별도 검토 대상입니다.
 
-pip/uv/npm/Ollama/Hugging Face의 저장소 경로와 로컬 Docker 사용량을 조회합니다. 파일 ID로 중복을 제거하고 논리/할당/공유/미측정 용량을 구분합니다. WPF에서 필터·근거·사용자 경로·취소/부분 결과를 확인할 수 있습니다. `정리·복구`에서 실행 차단 근거를 보고 앱 생성 샘플에 한해 별도 승인으로 보관·복원할 수 있습니다. 공간 확보량은 0입니다. 사람의 수동 UI 수용 확인은 아직 남아 있습니다. 실제 제품 삭제·Shell 휴지통·MCP 서버는 비활성/미구현 상태입니다.
+pip/uv/npm/Ollama/Hugging Face의 저장소 경로와 로컬 Docker 사용량을 조회합니다. 파일 ID로 중복을 제거하고 논리/할당/공유/미측정 용량을 구분합니다. WPF에서 필터·근거·사용자 경로·취소/부분 결과를 확인할 수 있습니다. `정리·복구`에서 실행 차단 근거를 보고 앱 생성 샘플에 한해 별도 승인으로 보관·복원할 수 있습니다. 공간 확보량은 0입니다. 사람의 수동 UI 수용 확인은 아직 남아 있습니다. MCP 공유는 기본 꺼짐이며 에이전트 계획은 실행 차단 상태입니다. Ollama 로컬 모델 조회와 별도 사용자 승인 언로드 흐름을 제공합니다. Claude Code/Codex 연결은 확인했으며 Cursor 실제 연결과 실제 모델 언로드 수용 검사는 남아 있습니다. 실제 제품 삭제·Shell 휴지통은 비활성입니다.
 
 ```powershell
 # 앱 실행 (자동 스캔·파일 이동 없음)
 ./scripts/Start-DevHarbor.ps1
 
 ./scripts/Validate.ps1
-# 정책·Windows 경계·발견/집계·WPF·승인/복구 검증
+# 정책·Windows 경계·발견/집계·WPF·승인/복구·MCP·모델 검증
 ./scripts/Validate.ps1 -WindowsIntegration
 ```
 

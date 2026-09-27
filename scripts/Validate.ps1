@@ -15,6 +15,10 @@ try {
     if($LASTEXITCODE -ne 0){throw 'Required SDK missing; install the version in global.json'}
     & $sdk restore src/DevHarbor.Ledger/DevHarbor.Ledger.csproj --locked-mode --nologo
     if($LASTEXITCODE -ne 0){throw 'Locked ledger restore failed'}
+    foreach($project in @('src/DevHarbor.Mcp/DevHarbor.Mcp.csproj','src/DevHarbor.AgentBridge/DevHarbor.AgentBridge.csproj','src/DevHarbor.Models/DevHarbor.Models.csproj','tests/DevHarbor.P4Checks/DevHarbor.P4Checks.csproj')) {
+        & $sdk restore $project --locked-mode --nologo
+        if($LASTEXITCODE -ne 0){throw 'Locked P4 restore failed'}
+    }
     & $sdk build DevHarbor.slnx --configuration Release --nologo
     if($LASTEXITCODE -ne 0){throw 'Build failed'}
     & $sdk run --project tests/DevHarbor.ContractChecks --configuration Release --no-build
@@ -28,6 +32,8 @@ try {
         if($LASTEXITCODE -ne 0){throw 'Desktop checks failed'}
         & $sdk run --project tests/DevHarbor.ExecutionChecks --configuration Release --no-build
         if($LASTEXITCODE -ne 0){throw 'Approval and recovery checks failed'}
+        & $sdk run --project tests/DevHarbor.P4Checks --configuration Release --no-build
+        if($LASTEXITCODE -ne 0){throw 'MCP and model checks failed'}
     }
     git diff --check
     if($LASTEXITCODE -ne 0){throw 'Whitespace validation failed'}

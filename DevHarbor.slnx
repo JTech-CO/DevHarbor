@@ -1,5 +1,8 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/DevHarbor.Mcp/DevHarbor.Mcp.csproj"/>
+    <Project Path="src/DevHarbor.AgentBridge/DevHarbor.AgentBridge.csproj"/>
+    <Project Path="src/DevHarbor.Models/DevHarbor.Models.csproj"/>
     <Project Path="src/DevHarbor.Ledger/DevHarbor.Ledger.csproj" />
     <Project Path="src/DevHarbor.Execution/DevHarbor.Execution.csproj" />
     <Project Path="src/DevHarbor.Domain/DevHarbor.Domain.csproj" />
@@ -8,6 +11,7 @@
     <Project Path="src/DevHarbor.Windows/DevHarbor.Windows.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/DevHarbor.P4Checks/DevHarbor.P4Checks.csproj"/>
     <Project Path="tests/DevHarbor.ExecutionChecks/DevHarbor.ExecutionChecks.csproj" />
     <Project Path="tests/DevHarbor.DesktopChecks/DevHarbor.DesktopChecks.csproj" />
     <Project Path="tests/DevHarbor.DiscoveryChecks/DevHarbor.DiscoveryChecks.csproj" />

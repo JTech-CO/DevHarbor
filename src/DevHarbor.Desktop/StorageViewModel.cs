@@ -66,6 +66,8 @@ public sealed class StorageViewModel : INotifyPropertyChanged
     private string driveFilter = "전체 드라이브", environmentFilter = "전체 환경", customPath = "";
     private StoreRow? selected;
     public event PropertyChangedEventHandler? PropertyChanged;
+    public event Action<ScanReport>? ScanCompleted;
+    public ScanReport? CurrentReport => report;
     public ObservableCollection<StoreRow> AllRows { get; } = [];
     public ICollectionView Rows { get; }
     public ObservableCollection<string> Drives { get; } = ["전체 드라이브"];
@@ -114,6 +116,7 @@ public sealed class StorageViewModel : INotifyPropertyChanged
             var progress = new Progress<ScanProgress>(p => { if (cancellation == cts) StatusText = $"{p.StoreId} 조사 중 · {p.Entries:N0}개 항목 · 중지하면 지금까지의 결과를 남깁니다."; });
             report = await scanner.ScanAsync([.. stores, .. custom], progress, cts.Token);
             AllRows.Clear(); foreach (var result in report.Stores) AllRows.Add(new(result));
+            ScanCompleted?.Invoke(report);
             string previousDrive = DriveFilter;
             Drives.Clear(); Drives.Add("전체 드라이브"); foreach (string drive in AllRows.Select(r => r.Drive).Where(d => d != "해당 없음").Distinct().Order()) Drives.Add(drive);
             DriveFilter = Drives.Contains(previousDrive) ? previousDrive : "전체 드라이브";
