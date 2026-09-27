@@ -24,7 +24,7 @@ P1 Windows 모듈은 **검사한 원본 파일 핸들을 그대로 유지한 NTF
 
 - Windows x64, 검사된 로컬 NTFS, 단일 regular file 64 MiB 이하. 대형 모델의 전체 해시 비용을 무제한 지불하지 않도록 P1의 실험 표면을 제한했다.
 - 격리 파일은 원본 ACL·ADS를 유지한다. “격리”는 되돌릴 수 있는 위치 변경이라는 의미이며 동일 사용자 권한의 악성 코드로부터 비밀을 지키는 저장소가 아니다.
-- 공개 API는 읽기 전용 `WindowsBoundary.Inspect`다. 변경 primitive는 internal이며 테스트 프로젝트에만 노출한다. 실제 앱/에이전트에서는 호출할 수 없다.
+- 공개 API는 읽기 전용 `WindowsBoundary.Inspect` 및 `ReadMetadata`다. 2026-09-27 추가한 `ReadMetadata`는 해시/변경 snapshot 없이 대형 파일을 관찰하며 [별도 계약](READONLY_BOUNDARY.md)을 따른다. 변경 primitive는 internal이며 테스트 프로젝트에만 노출한다. 실제 앱/에이전트에서는 호출할 수 없다.
 - P3의 승인·write-ahead 원장·크래시 복구가 없으므로 제품 변경 기능은 계속 false다.
 - 파일 내용이 이미 존재하는 writable memory mapping을 통해 변경되는 경우까지 불변임을 보증하지 않는다. P3 도구 사용 상태 검사와 별도 검증 없이는 live 저장소에 연결하지 않는다.
 - receipt JSON은 테스트 프로세스 사이의 전달용이다. 신뢰된 승인 토큰이나 영속 원장이 아니다.

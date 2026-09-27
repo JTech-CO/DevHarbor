@@ -6,6 +6,14 @@ namespace DevHarbor.Windows;
 // Read-only public inspection. Mutation stays internal to the P1 integration harness.
 public static class WindowsBoundary
 {
+    // Does not enumerate descendants or read file data; safe for large cache observations.
+    public static EntryMetadata ReadMetadata(string root, string path, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        using var lease = BoundaryLease.Metadata(root, path, cancellationToken);
+        return lease.Observation!;
+    }
+
     public static FileSnapshot Inspect(string root, string path, CancellationToken cancellationToken = default)
     {
         using var lease = BoundaryLease.File(root, path, false, cancellationToken);
@@ -19,6 +27,7 @@ internal sealed class BoundaryLease : IDisposable
     internal SafeFileHandle Handle => handles[^1];
     internal SafeFileHandle ParentHandle => handles[^2];
     internal string DirectoryIdentity { get; private set; } = "";
+    internal EntryMetadata? Observation { get; private set; }
     internal FileSnapshot? Snapshot { get; private set; }
 
     internal static BoundaryLease Directory(string path, CancellationToken cancellationToken)
@@ -32,7 +41,16 @@ internal sealed class BoundaryLease : IDisposable
         return Open(root, path, mutation, cancellationToken);
     }
 
-    private static BoundaryLease Open(string root, string? file, bool mutation, CancellationToken token)
+    internal static BoundaryLease Metadata(string root, string path, CancellationToken token)
+    {
+        root = BoundaryPath.Root(root);
+        path = BoundaryPath.Canonical(path);
+        if (!string.Equals(root, path, StringComparison.OrdinalIgnoreCase) && !BoundaryPath.Contains(root, path))
+            throw new BoundaryException(BoundaryError.OutsideBoundary, "Entry must be within the scan scope");
+        return Open(root, path, false, token, metadataOnly: true);
+    }
+
+    private static BoundaryLease Open(string root, string? file, bool mutation, CancellationToken token, bool metadataOnly = false)
     {
         var lease = new BoundaryLease();
         try
@@ -46,7 +64,7 @@ internal sealed class BoundaryLease : IDisposable
                 token.ThrowIfCancellationRequested();
                 if (i >= 0) current = Path.Combine(current, components[i]);
                 bool leaf = file != null && i == components.Length - 1;
-                var handle = NativeFile.Open(current, !leaf, mutation);
+                var handle = NativeFile.Open(current, !leaf, mutation, metadataOnly && leaf);
                 lease.handles.Add(handle);
                 var info = NativeFile.Info(handle);
                 if ((info.Attributes & NativeFile.Reparse) != 0) throw new BoundaryException(BoundaryError.ReparsePoint, "Reparse components are not traversed");
@@ -54,7 +72,22 @@ internal sealed class BoundaryLease : IDisposable
                 if (!string.Equals(NativeFile.FinalPath(handle), current.TrimEnd('\\'), StringComparison.OrdinalIgnoreCase))
                     throw new BoundaryException(BoundaryError.InvalidPath, "Aliases and substituted drives are not accepted");
                 if (i == -1) NativeFile.RequireNtfs(handle);
-                if (leaf)
+                if (leaf && metadataOnly)
+                {
+                    bool directory = (info.Attributes & NativeFile.Directory) != 0;
+                    if (directory) NativeFile.RequireInsensitiveDirectory(handle);
+                    var sizes = NativeFile.Standard(handle);
+                    var after = NativeFile.Info(handle);
+                    if (after.Identity != info.Identity || after.Attributes != info.Attributes || after.Length != info.Length ||
+                        after.LastWrite != info.LastWrite || after.Links != info.Links ||
+                        sizes.EndOfFile != info.Length || sizes.NumberOfLinks != info.Links || (sizes.Directory != 0) != directory)
+                        throw new BoundaryException(BoundaryError.TargetChanged, "Entry changed during metadata inspection");
+                    token.ThrowIfCancellationRequested();
+                    lease.Observation = new(root, file!, info.Identity, directory,
+                        directory ? null : sizes.EndOfFile, directory ? null : sizes.AllocationSize,
+                        info.Links, info.LastWrite, DateTimeOffset.UtcNow);
+                }
+                else if (leaf)
                 {
                     if ((info.Attributes & NativeFile.Directory) != 0) throw new BoundaryException(BoundaryError.UnsupportedFeature, "Recursive directory mutations are not supported");
                     if (info.Links != 1) throw new BoundaryException(BoundaryError.MultipleLinks, "Shared hardlinks are not mutation candidates");

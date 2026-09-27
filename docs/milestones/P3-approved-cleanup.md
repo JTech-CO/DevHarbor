@@ -1,13 +1,13 @@
 # P3 — 최종 승인, 제한 정리, 복구 원장
 
-상태: 대기. 선행: P1, P2. 담당: Execution, Ledger, Desktop.
+상태: 대기. 선행: P1, P2. [P1 종료 문서의 D1–D5](P1-closeout.md)는 제품 변경 활성화 전 차단 조건으로 인수한다. 담당: Execution, Ledger, Desktop.
 
 ## 작업
 
 1. 불변 plan, 만료, 단회 승인, 대상 fingerprint, 동시 계획 충돌을 정의한다.
 2. WPF의 정확한 대상 확인창과 사용자 세션에 제한된 승인 broker를 연결한다.
 3. SQLite intent 선기록, 항목별 결과, 크래시 후 실제 상태 대조를 구현한다.
-4. P1을 통과한 파일 작업과 범위가 검증된 pip/uv cache adapter만 활성화한다.
+4. D1–D5 중 대상 backend에 적용되는 차단 조건을 검증한 뒤, 승인·원장에 연결한 파일 작업과 범위가 검증된 pip/uv cache adapter만 활성화한다. 미검증 Shell은 계속 비활성화한다.
 5. 복원 충돌 시 기존 파일 보존, 재생성 작업의 인증/네트워크 오류를 표시한다.
 
 ## 산출물 및 게이트

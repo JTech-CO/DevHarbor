@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using DevHarbor.Windows;
 
-internal static class Program
+internal static partial class Program
 {
     private static readonly List<object> Results = [];
     private static int failures;
@@ -232,6 +232,8 @@ internal static class Program
                 Success(result); Require(Digest(result.Receipt!.StoredPath) == before, "Race changed bytes"); Success(HandleQuarantine.Restore(result.Receipt));
             }
         });
+
+        MetadataChecks();
 
         var report = new { timeUtc = DateTimeOffset.UtcNow, os = Environment.OSVersion.VersionString, architecture = RuntimeInformation.ProcessArchitecture.ToString(), failures,
             productionDeletionEnabled = false, recycleEnabled = WindowsCapabilities.CanRecycle, testResults = Results,

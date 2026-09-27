@@ -21,6 +21,14 @@ internal static class NativeFile
         internal readonly long LastWrite => ((long)Written.dwHighDateTime << 32) | (uint)Written.dwLowDateTime;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct StandardInfo
+    {
+        internal long AllocationSize, EndOfFile;
+        internal uint NumberOfLinks;
+        internal byte DeletePending, Directory;
+    }
+
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     private struct RenameInfo
     {
@@ -40,6 +48,8 @@ internal static class NativeFile
     private static extern uint GetFinalPathNameByHandleW(SafeFileHandle handle, StringBuilder path, uint length, uint flags);
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool GetFileInformationByHandleEx(SafeFileHandle handle, int kind, out uint flags, uint length);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetFileInformationByHandleEx(SafeFileHandle handle, int kind, out StandardInfo info, uint length);
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     private static extern bool GetVolumeInformationByHandleW(SafeFileHandle handle, StringBuilder? volumeName, uint volumeLength, out uint serial, out uint maximumComponent, out uint flags, StringBuilder fileSystem, uint fileSystemLength);
     [DllImport("ntdll.dll")]
@@ -61,13 +71,13 @@ internal static class NativeFile
         return new(reason, $"{operation}: {new Win32Exception(code).Message}", code);
     }
 
-    internal static SafeFileHandle Open(string path, bool directory, bool mutation)
+    internal static SafeFileHandle Open(string path, bool directory, bool mutation, bool metadataOnly = false)
     {
         // Attribute-only directory handles do not reliably prevent an empty directory rename.
         // FILE_LIST_DIRECTORY participates in sharing checks and pins the destination too.
-        uint access = directory ? ReadAttributes | 1u : GenericRead | (mutation ? Delete : 0);
+        uint access = directory ? ReadAttributes | 1u : metadataOnly ? ReadAttributes : GenericRead | (mutation ? Delete : 0);
         // Never grant delete sharing. Ancestors cannot be renamed/replaced during traversal.
-        var handle = CreateFileW(@"\\?\" + path, access, directory ? 3u : 1u, IntPtr.Zero, 3, 0x02200000, IntPtr.Zero);
+        var handle = CreateFileW(@"\\?\" + path, access, directory || metadataOnly ? 3u : 1u, IntPtr.Zero, 3, 0x02200000, IntPtr.Zero);
         if (!handle.IsInvalid) return handle;
         var error = Error("Open boundary component");
         handle.Dispose();
@@ -77,6 +87,16 @@ internal static class NativeFile
     internal static FileInfo Info(SafeFileHandle handle)
     {
         if (!GetFileInformationByHandle(handle, out var info)) throw Error("Read identity");
+        return info;
+    }
+
+    internal static StandardInfo Standard(SafeFileHandle handle)
+    {
+        if (!GetFileInformationByHandleEx(handle, 1, out StandardInfo info, (uint)Marshal.SizeOf<StandardInfo>()))
+            throw Error("Read stream sizes");
+        if (info.DeletePending != 0) throw new BoundaryException(BoundaryError.TargetChanged, "Entry is pending deletion");
+        if (info.AllocationSize < 0 || info.EndOfFile < 0)
+            throw new BoundaryException(BoundaryError.IoFailure, "Invalid stream sizes");
         return info;
     }
 

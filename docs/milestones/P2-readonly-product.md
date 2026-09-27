@@ -1,10 +1,10 @@
 # P2 — 저장소 지도와 읽기 전용 탐색
 
-상태: 대기. 선행: P0 및 검증된 P1 읽기 경계. 담당: Discovery, Evidence, Desktop.
+상태: 착수 가능(GO), 제품 구현 대기. 선행: P0 및 P1 읽기 경계 충족 — [종료 판정](P1-closeout.md), [읽기 API 계약](../architecture/READONLY_BOUNDARY.md). 담당: Discovery, Evidence, Desktop.
 
 ## 작업
 
-1. pip/uv의 설정 경로를 조회하고 fixture adapter로 저장소 지도까지 세로 구현한다.
+1. pip/uv의 설정 경로를 조회하고 fixture adapter로 저장소 지도까지 세로 구현한다. `ReadMetadata`를 사용하되 자식 열거·순회 경합·제외/부분 결과를 별도로 검증한다. `Inspect`의 내용 해시로 크기를 조사하지 않는다.
 2. npm/Ollama/HF/Docker를 읽기 전용으로 추가한다. 도구가 없으면 설치하지 않고 unavailable로 반환한다.
 3. 논리/할당/공유/미측정 크기를 구분하고 부모·자식 저장소 중복을 제거한다.
 4. WPF 화면에 도구별 표, 드라이브/환경 필터, 상태·근거·마지막 스캔, 취소·부분 결과를 표시한다.

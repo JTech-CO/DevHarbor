@@ -33,3 +33,9 @@ internal sealed record QuarantineReceipt(FileSnapshot Original, string Store, st
 
 internal sealed record MoveOutcome(bool Completed, BoundaryError? Error = null,
     QuarantineReceipt? Receipt = null, string? RestoredPath = null, int? NativeError = null);
+
+// Observation of one unnamed stream, not a content snapshot or cleanup authorization.
+public sealed record EntryMetadata(
+    string Root, string Path, FileIdentity Identity, bool IsDirectory,
+    long? LogicalBytes, long? AllocatedBytes, uint LinkCount,
+    long LastWrite, DateTimeOffset ObservedAt);

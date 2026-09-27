@@ -1,6 +1,6 @@
 # Windows P1 capability matrix
 
-2026-09-25. “검증”은 합성 fixture의 현재 Windows build 결과이며 제품 출시 승인이 아니다.
+2026-09-27. “검증”은 합성 fixture의 현재 Windows build 결과이며 제품 출시 승인이 아니다.
 
 | 대상/상황 | 구현 정책 | 실제 검증 |
 |---|---|---|
@@ -9,13 +9,16 @@
 | 한글·공백·260자 초과 경로 | 핸들 기반 처리 | 통과 |
 | 같은 NTFS 볼륨의 격리·복원 | exact file handle rename | 통과, 별도 프로세스 복원 |
 | 원본 ACL·alternate data stream | 동일 객체 이동으로 보존 | 통과 |
-| 루트 자체·형제 prefix·`..`·UNC·device path·ADS 요청 | 거부 | 통과 |
+| Inspect 루트 자체·형제 prefix·`..`·UNC·device path·ADS 요청 | 거부 | 통과 |
 | Windows/Program Files/ProgramData/전체 프로필 root | 거부 | Windows·프로필 실제 거부, 나머지는 동일 정책 |
-| junction/root alias/hardlink | 거부 | 통과 |
+| junction/root alias | 거부 | 통과 |
+| hardlink | Inspect/변경 거부, ReadMetadata는 ID/link 수 조회 허용 | 양쪽 정책 통과 |
+| metadata-only 크기 조회 | 내용 읽기 없음, 64 MiB 제한 없음 | 65 MiB ReadData 거부 + 5 GiB sparse 통과 |
+| 디렉터리 metadata | root 자체 허용, 하위 총량은 null | root/자식 디렉터리/빈 파일 구분 통과 |
 | case-sensitive 디렉터리 | 거부 | 실제 flag 설정 후 거부 확인 |
 | offline flag | 거부, 데이터 읽기 전 검사 | 실제 속성 설정 후 거부 확인 |
 | 실제 OneDrive provider placeholder | 거부 정책 | 실제 provider 미검증 |
-| 64 MiB 초과 / 폴더 재귀 변경 | 미지원 | 거부 통과 |
+| 64 MiB 초과 Inspect / 폴더 재귀 변경 | 미지원 | 거부 통과 |
 | 접근 거부 / 독점 잠금 | AccessDenied / Busy 구분 | ACL deny 및 잠금으로 통과 |
 | snapshot 이후 파일·root·내용 변경 | TargetChanged | 통과 |
 | syscall 직전 취소 | Cancelled, 원본 유지 | 통과 |
@@ -29,4 +32,4 @@
 | 재부팅/전원 손실/write-ahead 원장 | P3 선행 필요 | 미검증 |
 | 실제 사람 승인/MCP/실제 캐시 | P3/P4 선행 필요 | 미구현 |
 
-P2 읽기 전용 탐색을 진행할 수 있다. P1 실험의 64 MiB 내용 해시 제한을 대형 저장소 스캐너의 크기 조회 제한으로 그대로 복사하지 않는다. metadata-only enumeration 계약은 P2에서 별도로 구현한다. 제품 삭제·Shell 휴지통 capability를 열려면 승인·원장과 추가 Windows 검증 게이트를 통과해야 한다.
+P2 읽기 전용 탐색을 진행할 수 있다. P1 실험의 64 MiB 내용 해시 제한을 대형 저장소 스캐너의 크기 조회 제한으로 그대로 복사하지 않는다. 단일 항목 metadata-only 조회는 [읽기 경계 계약](READONLY_BOUNDARY.md)으로 제공한다. 안전한 자식 열거·집계는 P2에서 구현·검증한다. 제품 삭제·Shell 휴지통 capability를 열려면 승인·원장과 추가 Windows 검증 게이트를 통과해야 한다.
