@@ -18,7 +18,7 @@ public sealed record FileIdentity(uint Volume, ulong FileId);
 public sealed record FileStamp(FileIdentity Identity, long Length, long LastWrite, string Sha256);
 public sealed record FileSnapshot(string Root, string Path, string AncestorIdentity, FileStamp Stamp);
 
-// No production caller can enable mutation until P3 provides approval + durable ledger.
+// Production cache deletion remains disabled; P3 only enables managed sample hold/restore.
 public static class WindowsCapabilities
 {
     public static bool CanRecycle => false;

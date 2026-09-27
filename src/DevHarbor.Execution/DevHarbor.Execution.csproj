@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net10.0-windows</TargetFramework></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../DevHarbor.Windows/DevHarbor.Windows.csproj"/><ProjectReference Include="../DevHarbor.Ledger/DevHarbor.Ledger.csproj"/><ProjectReference Include="../DevHarbor.Discovery/DevHarbor.Discovery.csproj"/></ItemGroup>
+  <ItemGroup><InternalsVisibleTo Include="DevHarbor.Desktop"/><InternalsVisibleTo Include="DevHarbor.ExecutionChecks"/></ItemGroup>
+</Project>

@@ -1,10 +1,10 @@
 namespace DevHarbor.Windows;
 
-// Experimental primitive only. P3 must add real approval and a write-ahead ledger.
+// Internal primitive. Production cache cleanup remains disabled; P3 uses managed samples only.
 // There are no deletion, Shell fallback, cross-volume copy, or overwrite APIs here.
 internal static class HandleQuarantine
 {
-    internal static MoveOutcome Stage(FileSnapshot expected, string store, CancellationToken token = default, Action? beforeCommit = null)
+    internal static MoveOutcome Stage(FileSnapshot expected, string store, CancellationToken token = default, Action? beforeCommit = null, Action<QuarantineReceipt>? persistIntent = null)
     {
         try
         {
@@ -18,6 +18,7 @@ internal static class HandleQuarantine
             if (NativeFile.Info(source.Handle).Volume != NativeFile.Info(destination.Handle).Volume)
                 throw new BoundaryException(BoundaryError.UnsupportedFileSystem, "Cross-volume rename is not supported");
             var receipt = new QuarantineReceipt(expected, store, destination.DirectoryIdentity, Guid.NewGuid().ToString("N") + ".quarantine");
+            persistIntent?.Invoke(receipt); // Must durably commit intent before rename. Exceptions abort the move.
             beforeCommit?.Invoke(); // Internal deterministic race injection, not exposed to product callers.
             token.ThrowIfCancellationRequested();
             NativeFile.Rename(source.Handle, destination.Handle, receipt.StoredName);
@@ -27,7 +28,7 @@ internal static class HandleQuarantine
         catch (BoundaryException e) { return new(false, e.Reason, NativeError: e.NativeError); }
     }
 
-    internal static MoveOutcome Restore(QuarantineReceipt receipt, string? alternateLeaf = null, CancellationToken token = default, Action? beforeCommit = null)
+    internal static MoveOutcome Restore(QuarantineReceipt receipt, string? alternateLeaf = null, CancellationToken token = default, Action? beforeCommit = null, Action<string>? persistIntent = null)
     {
         try
         {
@@ -43,6 +44,7 @@ internal static class HandleQuarantine
             if (destination.DirectoryIdentity != receipt.Original.AncestorIdentity)
                 throw new BoundaryException(BoundaryError.TargetChanged, "Original ancestor identity changed");
             string restored = Path.Combine(parent, leaf);
+            persistIntent?.Invoke(restored);
             beforeCommit?.Invoke();
             token.ThrowIfCancellationRequested();
             NativeFile.Rename(source.Handle, destination.Handle, leaf);

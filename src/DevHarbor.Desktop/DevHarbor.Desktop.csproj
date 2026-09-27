@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0-windows</TargetFramework><UseWPF>true</UseWPF></PropertyGroup>
-  <ItemGroup><ProjectReference Include="../DevHarbor.Discovery/DevHarbor.Discovery.csproj" /></ItemGroup>
+  <ItemGroup><ProjectReference Include="../DevHarbor.Discovery/DevHarbor.Discovery.csproj" /><ProjectReference Include="../DevHarbor.Execution/DevHarbor.Execution.csproj" /></ItemGroup>
+  <ItemGroup><InternalsVisibleTo Include="DevHarbor.ExecutionChecks" /></ItemGroup>
 </Project>

@@ -3,7 +3,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace DevHarbor.Windows;
 
-// Read-only public inspection. Mutation stays internal to the P1 integration harness.
+// Read-only public inspection. Mutation stays internal to the managed workflow and integration harness.
 public static partial class WindowsBoundary
 {
     // Does not enumerate descendants or read file data; safe for large cache observations.

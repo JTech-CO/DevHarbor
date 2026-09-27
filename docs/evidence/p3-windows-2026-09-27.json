@@ -1,0 +1,162 @@
+{
+  "timeUtc": "2026-09-27T08:19:33.202788+00:00",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "failures": 0,
+  "testResults": [
+    {
+      "name": "approved-sample-hold-and-approved-restore",
+      "status": "passed"
+    },
+    {
+      "name": "forged-replayed-and-cross-broker-approvals-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "expired-plan-ticket-and-user-session-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "altered-plan-and-path-escape-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "target-change-after-approval-is-not-applied",
+      "status": "passed"
+    },
+    {
+      "name": "journal-failure-before-intent-never-moves",
+      "status": "passed"
+    },
+    {
+      "name": "result-write-failure-leaves-recoverable-intent",
+      "status": "passed"
+    },
+    {
+      "name": "cancel-before-and-after-intent",
+      "status": "passed"
+    },
+    {
+      "name": "cancel-after-rename-still-reports-committed",
+      "status": "passed"
+    },
+    {
+      "name": "restore-collision-and-explicit-alternate-approval",
+      "status": "passed"
+    },
+    {
+      "name": "concurrent-operation-and-recovery-exclusion",
+      "status": "passed"
+    },
+    {
+      "name": "database-corruption-does-not-recreate-or-move",
+      "status": "passed"
+    },
+    {
+      "name": "changed-held-payload-needs-review-no-auto-restore",
+      "status": "passed"
+    },
+    {
+      "name": "writable-mapping-probe-does-not-open-live-cache-gate",
+      "status": "passed"
+    },
+    {
+      "name": "pip-uv-and-other-stores-remain-blocked-with-reasons",
+      "status": "passed"
+    },
+    {
+      "name": "sample-parent-junction-rejected-before-file-creation",
+      "status": "passed"
+    },
+    {
+      "name": "state-parent-junction-rejected-before-creating-root",
+      "status": "passed"
+    },
+    {
+      "name": "missing-ledger-with-samples-never-resets-history",
+      "status": "passed"
+    },
+    {
+      "name": "approval-expires-after-durable-intent",
+      "status": "passed"
+    },
+    {
+      "name": "closed-session-revokes-approval",
+      "status": "passed"
+    },
+    {
+      "name": "unresolved-intent-blocks-new-plan-and-approval",
+      "status": "passed"
+    },
+    {
+      "name": "sqlite-write-lock-failure-never-moves",
+      "status": "passed"
+    },
+    {
+      "name": "corrupt-receipt-never-traverses-outside-sample",
+      "status": "passed"
+    },
+    {
+      "name": "crash-hold-approved-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-hold-before-intent-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-hold-intent-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-hold-moved-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-hold-before-result-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-hold-recorded-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-restore-approved-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-restore-before-intent-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-restore-intent-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-restore-moved-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-restore-before-result-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "crash-restore-recorded-fresh-process-reconcile",
+      "status": "passed"
+    },
+    {
+      "name": "approval-default-deny-target-display-and-expiry",
+      "status": "passed"
+    },
+    {
+      "name": "recovery-history-and-blocked-cache-render",
+      "status": "passed"
+    },
+    {
+      "name": "approval-history-bindings-resolve",
+      "status": "passed"
+    }
+  ],
+  "mappedObservation": "NotApplied:Busy",
+  "productionCleanupEnabled": false,
+  "humanApprovalManuallyVerified": false
+}

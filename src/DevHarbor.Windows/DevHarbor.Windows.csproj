@@ -4,5 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="DevHarbor.WindowsChecks" />
+    <InternalsVisibleTo Include="DevHarbor.Execution" />
+    <InternalsVisibleTo Include="DevHarbor.ExecutionChecks" />
   </ItemGroup>
 </Project>

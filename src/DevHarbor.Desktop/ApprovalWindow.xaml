@@ -1,0 +1,16 @@
+<Window x:Class="DevHarbor.Desktop.ApprovalWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="DevHarbor · 최종 확인" Width="800" Height="800" MinWidth="680" MinHeight="650" WindowStartupLocation="CenterOwner" Background="#F4F7F9" Foreground="#22354B" FontFamily="맑은 고딕" FontSize="13">
+ <Grid Margin="28" Background="#F4F7F9"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+ <StackPanel><TextBlock x:Name="Heading" FontSize="26" FontWeight="Bold"/><TextBlock Text="이 확인은 아래 파일 한 개에만 적용됩니다." Foreground="#607386" Margin="0,10,0,18"/></StackPanel>
+ <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"><StackPanel>
+  <Border Background="#FFF1D6" CornerRadius="8" Padding="16" Margin="0,0,0,18"><TextBlock Text="DevHarbor가 만든 검증용 파일입니다. 보관 위치로 옮겨도 디스크 공간은 늘어나지 않습니다. 휴지통 이동·영구 삭제·실제 캐시 정리는 지원하지 않습니다." TextWrapping="Wrap" Foreground="#805B20"/></Border>
+  <TextBlock Text="이동할 파일" FontWeight="SemiBold"/><TextBlock x:Name="SourceText" TextWrapping="Wrap" Margin="0,6,0,16"/>
+  <TextBlock Text="도착 위치" FontWeight="SemiBold"/><TextBlock x:Name="DestinationText" TextWrapping="Wrap" Margin="0,6,0,16"/>
+  <TextBlock x:Name="SizeText" Margin="0,0,0,16"/>
+  <TextBlock x:Name="RecoveryText" TextWrapping="Wrap" Margin="0,0,0,16" Foreground="#287361"/>
+  <Expander Header="파일·계획 식별 정보"><TextBlock x:Name="IdentityText" TextWrapping="Wrap" FontSize="11" Margin="0,10,0,12"/></Expander>
+ </StackPanel></ScrollViewer>
+ <StackPanel Grid.Row="2" Margin="0,16,0,16"><TextBlock x:Name="ExpiryText" Foreground="#805B20" Margin="0,0,0,12"/><CheckBox x:Name="Acknowledged" Content="대상과 복구 방법을 확인했습니다." Checked="AcknowledgementChanged" Unchecked="AcknowledgementChanged"/></StackPanel>
+ <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right"><Button Content="취소" IsCancel="True" Margin="0,0,12,0"/><Button x:Name="ConfirmButton" Content="이 파일 이동 승인" IsEnabled="False" Click="Confirm" Background="#207E74" Foreground="White"/></StackPanel>
+ </Grid>
+</Window>

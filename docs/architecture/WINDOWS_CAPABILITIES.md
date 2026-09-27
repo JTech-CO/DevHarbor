@@ -29,7 +29,9 @@
 | Shell 휴지통 사용 가능/비활성/한도 초과 | 모든 경우 CanRecycle=false | 요청 거부와 격리 payload 보존만 검증 |
 | 실제 휴지통 quota-full/disabled 처리 | backend 미연결 | 미검증, 시스템 설정 변경하지 않음 |
 | 영구 삭제 | API 없음, false | capability와 변경 없음 확인 |
-| 재부팅/전원 손실/write-ahead 원장 | P3 선행 필요 | 미검증 |
-| 실제 사람 승인/MCP/실제 캐시 | P3/P4 선행 필요 | 미구현 |
+| write-ahead 원장·프로세스 종료 대조 | 앱 생성 샘플만 | P3 12개 중단 지점 통과 |
+| 재부팅/전원 손실 | 지원 게이트 남음 | 미검증 |
+| 세션 승인 broker·최종 확인창 | P3 제한 구현 | 자동 거부·렌더링 검사 통과, 사람 수용 미실시 |
+| MCP/실제 캐시 변경 | P3/P4 게이트 남음 | 미구현/비활성 |
 
 P2 읽기 전용 탐색을 진행할 수 있다. P1 실험의 64 MiB 내용 해시 제한을 대형 저장소 스캐너의 크기 조회 제한으로 그대로 복사하지 않는다. 단일 항목 metadata-only 조회는 [읽기 경계 계약](READONLY_BOUNDARY.md)으로 제공한다. 안전한 자식 열거·집계는 P2에서 구현하고 [검증 결과](../milestones/P2-results.md)를 기록했다. 제품 삭제·Shell 휴지통 capability를 열려면 승인·원장과 추가 Windows 검증 게이트를 통과해야 한다.

@@ -1,11 +1,14 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/DevHarbor.Ledger/DevHarbor.Ledger.csproj" />
+    <Project Path="src/DevHarbor.Execution/DevHarbor.Execution.csproj" />
     <Project Path="src/DevHarbor.Domain/DevHarbor.Domain.csproj" />
     <Project Path="src/DevHarbor.Discovery/DevHarbor.Discovery.csproj" />
     <Project Path="src/DevHarbor.Desktop/DevHarbor.Desktop.csproj" />
     <Project Path="src/DevHarbor.Windows/DevHarbor.Windows.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/DevHarbor.ExecutionChecks/DevHarbor.ExecutionChecks.csproj" />
     <Project Path="tests/DevHarbor.DesktopChecks/DevHarbor.DesktopChecks.csproj" />
     <Project Path="tests/DevHarbor.DiscoveryChecks/DevHarbor.DiscoveryChecks.csproj" />
     <Project Path="tests/DevHarbor.ContractChecks/DevHarbor.ContractChecks.csproj" />

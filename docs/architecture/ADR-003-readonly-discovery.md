@@ -2,6 +2,8 @@
 
 채택 · 2026-09-27 · P2
 
+후속 변경: [ADR-004](ADR-004-approved-workflow.md)에서 별도 샘플 승인·복구 화면과 SQLite 의존성을 추가했다. 아래는 P2 읽기 전용 발견 계약이며 실제 저장소 스캔은 계속 읽기 전용이다.
+
 ## 구조
 
 `DevHarbor.Desktop`은 WPF 화면과 view model을, `DevHarbor.Discovery`는 경로 발견·CLI 제한·스캔 예산·집계를 맡는다. `DevHarbor.Windows`가 실제 NTFS 핸들을 연다. 새 외부 NuGet 의존성은 없다. UI/발견 모듈은 internal 격리 함수를 사용할 수 없으며 삭제·복원·승인 버튼을 제공하지 않는다.

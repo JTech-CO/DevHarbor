@@ -13,6 +13,8 @@ try {
     $env:DOTNET_CLI_HOME=Join-Path $repoPath '.tools/cli-home'
     & $sdk --version
     if($LASTEXITCODE -ne 0){throw 'Required SDK missing; install the version in global.json'}
+    & $sdk restore src/DevHarbor.Ledger/DevHarbor.Ledger.csproj --locked-mode --nologo
+    if($LASTEXITCODE -ne 0){throw 'Locked ledger restore failed'}
     & $sdk build DevHarbor.slnx --configuration Release --nologo
     if($LASTEXITCODE -ne 0){throw 'Build failed'}
     & $sdk run --project tests/DevHarbor.ContractChecks --configuration Release --no-build
@@ -24,6 +26,8 @@ try {
         if($LASTEXITCODE -ne 0){throw 'Discovery integration checks failed'}
         & $sdk run --project tests/DevHarbor.DesktopChecks --configuration Release --no-build
         if($LASTEXITCODE -ne 0){throw 'Desktop checks failed'}
+        & $sdk run --project tests/DevHarbor.ExecutionChecks --configuration Release --no-build
+        if($LASTEXITCODE -ne 0){throw 'Approval and recovery checks failed'}
     }
     git diff --check
     if($LASTEXITCODE -ne 0){throw 'Whitespace validation failed'}
